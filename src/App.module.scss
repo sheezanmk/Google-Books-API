@@ -1,0 +1,120 @@
+.main {
+  min-height: 100vh;
+  background: #2f67d1;
+  color: #eef2ff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 16px;
+  gap: 14px;
+}
+
+.left {
+  flex: 1;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+ align-items: flex-start;
+  text-align: left;
+  padding-left: 80px;
+}
+
+
+.title {
+  margin: 0;
+  font-size: 2.8rem;
+  line-height: 1.15;
+  font-weight: 800;
+}
+
+
+.subtitle {
+  margin: 0;
+  max-width: 52ch;
+  color: white;
+  line-height: 1.6;
+  font-size: 1.5em;
+}
+
+
+.search {
+  width: 100%;
+  max-width: 520px;
+  margin-top: 8px;
+  font-size: 1.2em;
+}
+.right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  width: min(800px, 100%);
+  height: auto;
+  display: block;
+  margin-left: 60px;
+}
+
+.message {
+  margin: 10px 0 0;
+  color: rgba(238, 242, 255, 0.9);
+  text-align: center;
+}
+
+.error {
+  margin: 10px 0 0;
+  color: #ffd1d1;
+  font-weight: 700;
+  text-align: center;
+}
+
+  .landingPage {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px 80px;
+}
+
+.searchResults {
+  max-width: 80%;
+  margin: 40px auto 0;
+}
+
+.searchResultsTitle {
+  margin: 0 0 14px;
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.resultsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pagination button {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.12);
+  color: #eef2ff;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

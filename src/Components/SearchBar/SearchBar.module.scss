@@ -1,0 +1,37 @@
+.form {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  border: 1px solid rgba(238, 242, 255, 0.12);
+
+  padding: 14px;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  flex: 1 1 320px;
+}
+
+.input {
+  border: 1px solid rgba(238, 242, 255, 0.16);
+
+  padding: 12px 14px;
+  font-size: 1rem;
+}
+
+.button {
+  border: none;
+  background-color: rgb(232, 175, 70);
+
+  padding: 12px 16px;
+  font-weight: 700;
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(1.05);
+  }
+}
