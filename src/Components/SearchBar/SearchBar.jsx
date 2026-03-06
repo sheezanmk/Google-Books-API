@@ -1,7 +1,7 @@
 import styles from "./SearchBar.module.scss";
-import { use, useState } from "react";
+import { useState } from "react";
 
-const SearchBar = ({onSearch}) => {
+const SearchBar = ({onSearch, isLoading}) => {
     const [searchTerm, setSearchTerm] = useState("");
 
     const  handleSubmit = (event) => {
@@ -20,7 +20,7 @@ const SearchBar = ({onSearch}) => {
             placeholder="e.g. Harry Porter"
             onChange={(e) => setSearchTerm(e.target.value)}
             />
-        <button className={styles.button} type = "submit">Search</button>
+        <button className={styles.button} type = "submit" disabled={isLoading}>Search</button>
 
     </form>
   );

@@ -4,8 +4,11 @@ export async function searchBooks (query, startIndex = 0, maxResults = 40 ) {
     queryParams.set("q", query);
     queryParams.set("startIndex", String(startIndex));
     queryParams.set("maxResults", String(maxResults));
+    queryParams.set("key", import.meta.env.VITE_GOOGLE_BOOK_API_KEY);
 
-    const url = "https://www.googleapis.com/books/v1/volumes?q=" + queryParams.toString();
+    const url = "https://www.googleapis.com/books/v1/volumes?" + queryParams.toString();
+
+
     
 
     const response = await fetch(url);

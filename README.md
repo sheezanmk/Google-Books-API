@@ -1,16 +1,165 @@
-# React + Vite
+## Google Books Search Engine
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React application that allows users to search the Google Books database, browse paginated results, and view detailed information about each book
 
-Currently, two official plugins are available:
+## Goal
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The goal of this project was to build a book search interface using the Google Books API.
 
-## React Compiler
+- Users should be able to:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Search for books by keyword
 
-## Expanding the ESLint configuration
+- View results returned by the Google Books API
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Browse results in a responsive layout
+
+- See additional details for each book
+
+## Purpose of the project
+
+This project focuses on practicing:
+
+- Asynchronous API requests
+
+- State management in React
+
+- Conditional rendering
+
+- Component-based architecture
+
+- UI feedback for loading, errors and empty results
+
+## Stack used
+
+# React
+
+- Used to build a component-driven UI and manage application state.
+
+# JavaScript (ES6+)
+
+- Handles application logic, async API calls, and state updates.
+
+- Google Books API
+
+- Provides access to a large database of book information.
+
+# SCSS Modules
+
+- Allows scoped styling per component and better maintainability.
+
+# Vite
+
+Fast development environment with hot reloading.
+
+## Build Steps
+
+- Clone the repository
+- git clone https://github.com/your-username/google-books-search.git
+- Navigate to project
+- cd google-books-search
+- Install dependencies
+- npm install
+- Run the development server
+- npm run dev
+
+- Open the application at:
+
+- http://localhost:5173
+
+# Design Goals
+
+The application was designed to:
+
+- Provide a clean and intuitive search experience
+
+- Clearly communicate system state (loading, errors, empty results)
+
+- Keep the UI responsive across screen sizes
+
+- Maintain separation of concerns between UI and data fetching
+
+## Implementation Approach
+
+- App.jsx acts as the central controller managing search, pagination, and modal state.
+
+- API calls are isolated in a dedicated helper file (googlebooksapi.js) to separate networking logic from UI.
+
+- Pagination logic was extracted into helper utilities to avoid duplicating code.
+
+- UI components were broken down into smaller reusable pieces:
+
+App
+├── SearchBar
+├── BookGrid
+│ └── BookCard
+├── Pagination
+└── BookDetails (Modal)
+
+This structure improves readability and scalability.
+
+## Features
+
+- Book Search
+  - Users can search for books using keywords.
+
+  - Google Books API Integration
+
+  - Data is fetched asynchronously from the Google Books API.
+
+- Pagination
+  - Results are paginated using the API parameters:
+    - startIndex
+    - maxResults
+
+- Book Details Modal
+  - Clicking a book card opens a modal showing:
+    - Title
+
+    - Author(s)
+
+    - Publisher
+
+    - Published date
+
+    - Description
+
+- Loading and Error States
+  - The UI communicates when:
+    - data is loading
+
+    - no results were found
+
+    - a request fails
+
+- Responsive Layout
+
+Books are displayed in a responsive flex layout that adapts to screen size.
+
+## Known Issues
+
+- Google Books API fuzzy matching
+
+- The API often returns results even for unrelated queries because it performs fuzzy matching across multiple metadata fields.
+
+- Result count accuracy
+  - The totalItems field returned by the API can be an approximate value and may show large rounded numbers (e.g. 50,000).
+
+- API Rate Limiting
+  - Without an API key, Google Books can occasionally return a 429 Too Many Requests response.
+
+## Future Goals
+
+Given more time, the following improvements would be implemented:
+
+- Debounced search to prevent rapid API calls
+
+- URL query parameters for shareable searches
+
+- Accessibility improvements for modal focus management
+
+- Unit tests for pagination logic
+
+- Skeleton loading placeholders
+
+- Improved relevance filtering for search results

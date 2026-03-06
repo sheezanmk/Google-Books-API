@@ -5,6 +5,8 @@ import BookGrid from "./Components/BookGrid/BookGrid";
 import styles from "./App.module.scss";
 import booksImg from "./assets/books.png";
 import BookDetails from "./Components/BookDetails/BookDetails";
+import Pagination from "./Components/Pagination/Pagination";
+import { getStartIndex } from "./Components/Pagination/PaginationLogic";
 
 function App() {
   const [query, setQuery] = useState("");
@@ -12,10 +14,10 @@ function App() {
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
-  const pageSize = 40;
-const [totalResults, setTotalResults]= useState(0);
-const [selectedBook, setSelectedBook] = useState(null);
-const [isModalOpen, setIsModalOpen] = useState(false);
+  const pageSize = 20;
+  const [totalResults, setTotalResults]= useState(0);
+  const [selectedBook, setSelectedBook] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   
 
 const handleSearch = async (searchTerm) => {
@@ -24,7 +26,7 @@ const handleSearch = async (searchTerm) => {
     setQuery("");
     setBooks([]);
     setTotalResults(0);
-    setStatus("Empty");
+    setStatus("Error");
     setError("Please enter a keyword");
     return;
   }
@@ -38,7 +40,7 @@ const handleSearch = async (searchTerm) => {
       const data = await searchBooks(searchTerm, firstIndex, pageSize);
 
       setTotalResults(data.totalItems ? data.totalItems : 0);
-      console.log(data);
+     // console.log(data);
 
       if (data.items && data.items.length > 0) {
         setBooks(data.items);
@@ -62,7 +64,7 @@ const handleSearch = async (searchTerm) => {
   setError("");
 
   try {
-    const startIndex = (nextPage - 1) * pageSize;
+    const startIndex = getStartIndex(nextPage, pageSize);
     const data = await searchBooks(query, startIndex, pageSize);
 
     setTotalResults(data.totalItems ? data.totalItems : 0);
@@ -103,7 +105,7 @@ const closeModal = () => {
       Search the Google Books database by title, author, or keyword.
     </p>
        <div className={styles.search}>
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar onSearch={handleSearch} isLoading= {status==="Loading"} />
     </div>
       
 
@@ -119,27 +121,15 @@ const closeModal = () => {
     <section className={styles.searchResults}>
       <div className={styles.resultsHeader}>
       <h2 className={styles.searchResultsTitle}>Results for {query}</h2>
-      <div className={styles.pagination}>
-         <button
-          type="button"
-          onClick={() => fetchPage(pageNumber - 1)}
-          disabled={pageNumber === 1}
-        >
-          Prev
-        </button>
+      <Pagination
+  pageNumber={pageNumber}
+  pageSize={pageSize}
+  totalResults={totalResults}
+  isLoading={status === "Loading"}
+  onPrev={() => fetchPage(pageNumber - 1)}
+  onNext={() => fetchPage(pageNumber + 1)}
+/>
 
-         <span>
-          Page {pageNumber}
-        </span>
-
-        <button
-          type="button"
-          onClick={() => fetchPage(pageNumber + 1)}
-          disabled={pageNumber * pageSize >= totalResults}
-        >
-          Next
-        </button>
-        </div>
         </div>
       <BookGrid books={books} onBookSelect={openModal} />
     </section>
